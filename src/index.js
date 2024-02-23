@@ -1,12 +1,16 @@
 const express = require("express");
 const connect = require("./config/database");
-const bot = require("./bot"); 
+const bot = require("./bot");
 const User = require("./models/user");
+const PORT = process.env.PORT;
+const apiRoutes = require("./routes");
 
 const app = express();
-const PORT = process.env.PORT;
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Start Express server
+app.use("/api", apiRoutes);
+
 app.listen(PORT, async () => {
   console.log(`Express server started at ${PORT}`);
   try {
@@ -18,4 +22,4 @@ app.listen(PORT, async () => {
 });
 
 // Start Telegraf bot
-bot.launch()
+bot.launch();
