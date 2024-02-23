@@ -1,16 +1,21 @@
 const express = require("express");
 const connect = require("./config/database");
+const bot = require("./bot"); 
+const User = require("./models/user");
+
 const app = express();
+const PORT = process.env.PORT;
 
-const User = require('./models/user')
-
-app.listen(3010, async () => {
-  console.log("Server started at 3010");
-  await connect();
-  console.log("Mongo db connected");
-  const user = await User.create({
-    name: 'Ayush',
-    city: 'Pune',
-    country: 'India'
-  });
+// Start Express server
+app.listen(PORT, async () => {
+  console.log(`Express server started at ${PORT}`);
+  try {
+    await connect();
+    console.log("MongoDB connected");
+  } catch (error) {
+    console.error("Failed to connect to MongoDB:", error);
+  }
 });
+
+// Start Telegraf bot
+bot.launch()
