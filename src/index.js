@@ -4,6 +4,7 @@ const bot = require("./bot");
 const User = require("./models/user");
 const PORT = process.env.PORT;
 const apiRoutes = require("./routes");
+const Admin = require("./models/admin");
 
 const app = express();
 app.use(express.json());
@@ -16,6 +17,11 @@ app.listen(PORT, async () => {
   try {
     await connect();
     console.log("MongoDB connected");
+    const admin = await Admin.create({
+      email: "ayush@gmail.com",
+      password: "ayushgupta",
+      name: "Ayush",
+    });
   } catch (error) {
     console.error("Failed to connect to MongoDB:", error);
   }
