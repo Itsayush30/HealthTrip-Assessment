@@ -17,11 +17,6 @@ app.listen(PORT, async () => {
   try {
     await connect();
     console.log("MongoDB connected");
-    const admin = await Admin.create({
-      email: "ayush@gmail.com",
-      password: "ayushgupta",
-      name: "Ayush",
-    });
   } catch (error) {
     console.error("Failed to connect to MongoDB:", error);
   }
