@@ -17,7 +17,6 @@ bot.start((ctx) => {
 
 // Command to handle registration and adding user to the database
 bot.command("register", async (ctx) => {
-
   const telegramId = ctx.message.from.id;
   console.log("Telegram ID:", telegramId);
 
@@ -107,6 +106,6 @@ const sendWeatherUpdates = async () => {
 };
 
 // Schedule the task to send weather updates every day
-cron.schedule("*/5 * * * * *", sendWeatherUpdates);
+cron.schedule(process.env.MESSAGE_FREQUENCY, sendWeatherUpdates); // 5second for now
 
 module.exports = bot;
