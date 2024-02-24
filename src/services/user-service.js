@@ -1,7 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const { UserRepository } = require("../repositories");
 const AppError = require("../utils/errors/app-error");
-const { data } = require("../utils/common/error-response");
 
 class UserService {
   constructor() {
@@ -14,7 +13,10 @@ class UserService {
       const user = await this.userRepository.create(data);
       return user;
     } catch (error) {
-      throw error;
+      throw new AppError(
+        "cannot create a new user",
+        StatusCodes.INTERNAL_SERVER_ERROR
+      );
     }
   }
 }

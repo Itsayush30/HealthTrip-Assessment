@@ -1,22 +1,21 @@
-const updateApiKey  = require('../services/api-key-service');
+const { StatusCodes } = require("http-status-codes");
+const { SuccessResponse, ErrorResponse } = require("../utils/common");
+const updateApiKey = require("../services/api-key-service");
 
-// Define controller function to update API keys
 const updateApiKeysController = async (req, res) => {
-  const { newApiKey } = req.body;
-
-  // Validate the new API key
-  if (!newApiKey) {
-    return res.status(400).json({ success: false, error: 'New API key is required' });
-  }
+  //const { newApiKey } = req.body;
+  //if (!newApiKey) {
+  //return res.status(400).json({ success: false, error: 'New API key is required' });
+  //}
 
   try {
-    const updated = await updateApiKey(newApiKey);
-    if (updated) {
-      return res.status(200).json({ success: true, message: 'API key updated successfully' });
-    }
+    const updated = await updateApiKey(req.body.newApiKey);
+    SuccessResponse.data = updated;
+    return res.status(StatusCodes.OK).json(SuccessResponse);
   } catch (error) {
-    console.error('Error updating API key:', error);
-    return res.status(500).json({ success: false, error: 'Failed to update API key' });
+    console.error("Error updating API key:", error);
+    ErrorResponse.error = error;
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
   }
 };
 
