@@ -1,6 +1,6 @@
 const express = require("express");
 
-const createUser = require("../../controllers/user-controller");
+const { createUser, DeleteUser } = require("../../controllers/user-controller");
 const MsgFrequencyController = require("../../controllers/msg-frequency-controller");
 const {
   updateApiKeysController,
@@ -9,6 +9,8 @@ const {
 const router = express.Router();
 
 router.post("/users", createUser);
+
+router.delete("/user", DeleteUser);
 
 router.post("/apikey", updateApiKeysController);
 

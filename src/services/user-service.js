@@ -19,6 +19,19 @@ class UserService {
       );
     }
   }
+
+  async Delete(id) {
+    try {
+      console.log(id);
+      const user = await this.userRepository.destroy(id);
+      return user;
+    } catch (error) {
+      throw new AppError(
+        "cannot delete the user",
+        StatusCodes.INTERNAL_SERVER_ERROR
+      );
+    }
+  }
 }
 
 module.exports = UserService;

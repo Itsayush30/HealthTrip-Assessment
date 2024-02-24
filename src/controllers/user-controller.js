@@ -20,4 +20,16 @@ const createUser = async (req, res) => {
   }
 };
 
-module.exports = createUser;
+const DeleteUser = async (req, res) => {
+  try {
+    const response = await userService.Delete(req.body.id);
+    SuccessResponse.data = response;
+    return res.status(StatusCodes.CREATED).json(SuccessResponse);
+  } catch (error) {
+    console.log(error);
+    ErrorResponse.error = error;
+    return res.status(error.statusCode).json(ErrorResponse);
+  }
+};
+
+module.exports = { createUser, DeleteUser };
