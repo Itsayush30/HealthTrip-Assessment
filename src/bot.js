@@ -1,15 +1,39 @@
 const { Telegraf } = require("telegraf");
 const axios = require("axios");
-require('dotenv').config()
+const connect = require("./config/database");
+const User = require("./models/user");
+require("dotenv").config();
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 
 const weatherAPIKey = process.env.WEATHER_API_KEY;
 
+// Command to handle registration and adding user to the database
+bot.command("register", async (ctx) => {
+  const [name, city, country] = ctx.message.text.split(" ").slice(1);
+
+  if (!name || !city || !country) {
+    ctx.reply(
+      "Please provide your name, city, and country in the format: /register <name> <city> <country>"
+    );
+    return;
+  }
+
+  await connect();
+
+  try {
+    // Create a new user document and save it to the database
+    const user = await User.create({ name, city, country });
+    ctx.reply(`User ${name} registered successfully!`);
+  } catch (error) {
+    console.error("Error registering user:", error);
+    ctx.reply("Failed to register user. Please try again later.");
+  }
+});
+
 // Function to fetch weather data
 
-bot.start((ctx) => ctx.reply('Welcome'))
-
+bot.start((ctx) => ctx.reply("Welcome")); // /start
 
 const getWeatherReport = async (cityName) => {
   try {
