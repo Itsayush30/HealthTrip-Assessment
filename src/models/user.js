@@ -14,6 +14,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    telegramId: {
+      type: Number,
+      required: true,
+    },
   },
   { timestamps: true }
 );
