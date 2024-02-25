@@ -25,7 +25,17 @@ function createToken(input) {
   }
 }
 
+function verifyToken(token) {
+  try {
+    return jwt.verify(token, process.env.JWT_SECRET);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 module.exports = {
   checkPassword,
   createToken,
+  verifyToken,
 };

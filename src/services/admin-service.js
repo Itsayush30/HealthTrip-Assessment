@@ -1,9 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const AdminRepository = require("../repositories/admin-repository");
 const AppError = require("../utils/errors/app-error");
-const { Auth } = require("../utils/common/auth");
-const { checkPassword,createToken } = require("../utils/common/auth");
-
+const { checkPassword, createToken,verifyToken } = require("../utils/common/auth");
 
 class AdminService {
   constructor() {
@@ -29,6 +27,32 @@ class AdminService {
     } catch (error) {
       if (error instanceof AppError) throw error;
       console.log(error);
+      throw new AppError(
+        "Something went wrong",
+        StatusCodes.INTERNAL_SERVER_ERROR
+      );
+    }
+  }
+
+  async isAuthenticated(token) {
+    try {
+        //console.log(token")
+      if (!token) {
+        throw new AppError("Missing jwt token", StatusCodes.BAD_REQUEST);
+      }
+      const response = verifyToken(token);
+      console.log(response)
+      const admin = await this.adminRepository.get(response.id);
+      //console.log(admin)
+      if (!admin) {
+        throw new AppError("No admin found", StatusCodes.BAD_REQUEST);
+      }
+      return admin.id;
+    } catch (error) {
+      if (error instanceof AppError) throw error;
+      if (error.name == "JsonWebTokenError") {
+        throw new AppError("invalid JWT token", StatusCodes.BAD_REQUEST);
+      }
       throw new AppError(
         "Something went wrong",
         StatusCodes.INTERNAL_SERVER_ERROR
