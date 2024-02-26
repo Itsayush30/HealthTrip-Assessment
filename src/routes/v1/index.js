@@ -5,8 +5,12 @@ const { createUser, DeleteUser } = require("../../controllers/user-controller");
 const MsgFrequencyController = require("../../controllers/msg-frequency-controller");
 
 const {
-  updateApiKeysController,
-} = require("../../controllers/api-key-controller");
+    updateWeatherApiKeysController,
+} = require("../../controllers/weather-api-key-controller");
+
+const {
+  updateBotApiKeysController
+} = require("../../controllers/bot-api-key-controller");
 
 const {
   validateAuthRequest,
@@ -15,13 +19,15 @@ const {
 
 const router = express.Router();
 
-router.post("/users", checkAuth,createUser);
+router.post("/users", checkAuth, createUser);
 
-router.delete("/user", checkAuth,DeleteUser);
+router.delete("/user", checkAuth, DeleteUser);
 
-router.post("/apikey", checkAuth,updateApiKeysController);
+router.post("/weatherapikey", checkAuth, updateWeatherApiKeysController);
 
-router.post("/msgfrequency", checkAuth,MsgFrequencyController);
+router.post("/botapikey", checkAuth, updateBotApiKeysController);
+
+router.post("/msgfrequency", checkAuth, MsgFrequencyController);
 
 router.post("/signin", validateAuthRequest, signin);
 

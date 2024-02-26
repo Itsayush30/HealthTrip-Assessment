@@ -1,8 +1,8 @@
 const { StatusCodes } = require("http-status-codes");
 const { SuccessResponse, ErrorResponse } = require("../utils/common");
-const updateApiKey = require("../services/api-key-service");
+const updateApiKey = require("../services/bot-api-key-service");
 
-const updateApiKeysController = async (req, res) => {
+const updateBotApiKeysController = async (req, res) => {
   //const { newApiKey } = req.body;
   //if (!newApiKey) {
   //return res.status(400).json({ success: false, error: 'New API key is required' });
@@ -19,4 +19,4 @@ const updateApiKeysController = async (req, res) => {
   }
 };
 
-module.exports = { updateApiKeysController };
+module.exports = { updateBotApiKeysController };

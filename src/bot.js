@@ -12,7 +12,21 @@ const weatherAPIKey = process.env.WEATHER_API_KEY;
 bot.start((ctx) => {
   const userId = ctx.message.from.id;
   console.log("User ID:", userId);
-  ctx.reply("Welcome!");
+  ctx.reply(`🌤️ Welcome to MyWeatherBot! 🌧️
+
+Hello,
+  
+Thank you for joining WeatherBot! 🤖
+  
+To receive daily weather updates for your location, please register with us by typing:
+  
+/register <Your Name> <City> <Country>
+  
+For example:
+/register Ayush Pune India  
+Once registered, you'll start receiving daily weather updates for your area.
+  
+Enjoy your stay! ☀️`);
 }); // /start
 
 // Command to handle registration and adding user to the database
@@ -91,10 +105,16 @@ const sendWeatherUpdates = async () => {
         console.log(user);
         const weatherDescription = weatherData.weather[0].description;
         const temperature = weatherData.main.temp;
+        const humidity = weatherData.main.humidity;
+        const windSpeed = weatherData.wind.speed;
 
         bot.telegram.sendMessage(
           user.telegramId,
-          `Weather in ${cityName}: ${weatherDescription}, Temperature: ${temperature}°C`
+          `Weather in ${cityName}: ${weatherDescription}
+          🌡️ Temperature: ${temperature}°C
+          💧 Humidity: ${humidity}%
+          💨 Wind Speed: ${windSpeed} m/s`,
+          { parse_mode: "HTML" }
         );
       } else {
         console.error(`Failed to fetch weather data for ${cityName}.`);
