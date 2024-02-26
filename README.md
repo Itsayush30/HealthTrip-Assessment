@@ -1,5 +1,9 @@
 # Backend Documentation for Weather Update Telegram Bot
 
+<img width="367" alt="Screenshot 2024-02-26 at 12 34 35 PM" src="https://github.com/Itsayush30/Telegram-Weather-Bot/assets/90981890/1295a045-7726-43a8-99f8-bd56b80f3432">
+
+Note- For testing purpose, here the message frequency is reduced.
+
 ## Overview
 
 This document provides an overview of the backend implementation for the Weather Update Telegram Bot project. The backend is developed using Node.js, Express.js, MongoDB, and JWT authentication for the admin panel.
