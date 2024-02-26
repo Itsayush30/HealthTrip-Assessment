@@ -8,6 +8,8 @@ const {
     updateWeatherApiKeysController,
 } = require("../../controllers/weather-api-key-controller");
 
+const {WeatherApivalidateAuthRequest} = require("../../middlewares/weather-middleware")
+
 const {
   updateBotApiKeysController
 } = require("../../controllers/bot-api-key-controller");
@@ -23,7 +25,7 @@ router.post("/users", checkAuth, createUser);
 
 router.delete("/user", checkAuth, DeleteUser);
 
-router.post("/weatherapikey", checkAuth, updateWeatherApiKeysController);
+router.post("/weatherapikey", WeatherApivalidateAuthRequest,checkAuth, updateWeatherApiKeysController);
 
 router.post("/botapikey", checkAuth, updateBotApiKeysController);
 
