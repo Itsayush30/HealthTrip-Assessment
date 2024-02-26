@@ -1,13 +1,15 @@
 const { StatusCodes } = require("http-status-codes");
 
-const { ErrorResponse } = require("../utils/common/error-response");
+const { ErrorResponse } = require("../utils/common");
 const AppError = require("../utils/errors/app-error");
 
 const AdminService = require("../services/admin-service");
 const adminService = new AdminService();
 
 function validateAuthRequest(req, res, next) {
+    //console.log("middleware1")
   if (!req.body.email) {
+    //console.log("middleware2",ErrorResponse)
     ErrorResponse.message = "Something went wrong while authenticating user";
     ErrorResponse.error = new AppError(
       ["Email not found in the incoming request in the correct form"],

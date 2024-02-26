@@ -15,14 +15,14 @@ const {
 
 const router = express.Router();
 
-router.post("/users", createUser);
+router.post("/users", checkAuth,createUser);
 
-router.delete("/user", DeleteUser);
+router.delete("/user", checkAuth,DeleteUser);
 
 router.post("/apikey", checkAuth,updateApiKeysController);
 
-router.post("/msgfrequency", MsgFrequencyController);
+router.post("/msgfrequency", checkAuth,MsgFrequencyController);
 
-router.post("/signin", signin);
+router.post("/signin", validateAuthRequest, signin);
 
 module.exports = router;
