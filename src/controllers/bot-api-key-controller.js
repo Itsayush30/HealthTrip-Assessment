@@ -19,4 +19,4 @@ const updateBotApiKeysController = async (req, res) => {
   }
 };
 
-module.exports = { updateBotApiKeysController };
+module.exports = updateBotApiKeysController;

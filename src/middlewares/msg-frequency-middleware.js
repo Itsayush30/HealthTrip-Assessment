@@ -2,13 +2,13 @@ const { StatusCodes } = require("http-status-codes");
 const { ErrorResponse } = require("../utils/common");
 const AppError = require("../utils/errors/app-error");
 
-function WeatherApivalidateAuthRequest(req, res, next) {
+function newMsgFrequencyvalidateAuthRequest(req, res, next) {
   //console.log("middleware1")
-  if (!req.body.newApiKey) {
+  if (!req.body.newMsgFrequency) {
     //console.log("middleware2",ErrorResponse)
     ErrorResponse.message = "Something went wrong";
     ErrorResponse.error = new AppError(
-      ["newApiKey not found in the incoming request in the correct form"],
+      ["newMsgFrequency not found in the incoming request in the correct form"],
       StatusCodes.BAD_REQUEST
     );
     return res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
@@ -16,4 +16,4 @@ function WeatherApivalidateAuthRequest(req, res, next) {
   next();
 }
 
-module.exports = WeatherApivalidateAuthRequest;
+module.exports = newMsgFrequencyvalidateAuthRequest;

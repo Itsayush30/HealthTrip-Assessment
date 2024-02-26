@@ -1,10 +1,8 @@
 const express = require("express");
 const connect = require("./config/database");
 const bot = require("./bot");
-const User = require("./models/user");
 const PORT = process.env.PORT;
 const apiRoutes = require("./routes");
-const Admin = require("./models/admin");
 
 const app = express();
 app.use(express.json());

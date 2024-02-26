@@ -2,7 +2,7 @@ const { StatusCodes } = require("http-status-codes");
 const { ErrorResponse } = require("../utils/common");
 const AppError = require("../utils/errors/app-error");
 
-function WeatherApivalidateAuthRequest(req, res, next) {
+function BotApivalidateAuthRequest(req, res, next) {
   //console.log("middleware1")
   if (!req.body.newApiKey) {
     //console.log("middleware2",ErrorResponse)
@@ -16,4 +16,4 @@ function WeatherApivalidateAuthRequest(req, res, next) {
   next();
 }
 
-module.exports = WeatherApivalidateAuthRequest;
+module.exports = BotApivalidateAuthRequest;

@@ -1,8 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const { SuccessResponse, ErrorResponse } = require("../utils/common");
-const  AdminService  = require("../services/admin-service");
+const AdminService = require("../services/admin-service");
 const adminService = new AdminService();
-
 
 async function signin(req, res) {
   try {
@@ -19,6 +18,4 @@ async function signin(req, res) {
   }
 }
 
-module.exports = {
-  signin,
-};
+module.exports = signin;

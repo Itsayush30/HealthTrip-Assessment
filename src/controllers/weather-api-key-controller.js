@@ -19,4 +19,4 @@ const updateWeatherApiKeysController = async (req, res) => {
   }
 };
 
-module.exports = { updateWeatherApiKeysController };
+module.exports = updateWeatherApiKeysController;
